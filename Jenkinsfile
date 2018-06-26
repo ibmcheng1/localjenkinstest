@@ -1,7 +1,4 @@
-def workingDirectory
-environment {
-        HELM_DIR = null
-}
+def workingDirectory = '.'
 def volumes = [ hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock') ]
 volumes += secretVolume(secretName: 'microclimate-registry-secret', mountPath: '/jenkins_docker_sec')
 podTemplate(label: 'icp-liberty-build',
@@ -20,14 +17,13 @@ podTemplate(label: 'icp-liberty-build',
  
         stage ('Push to UCD...') {
 	    echo "workingDirectory 1: " + workingDirectory
-	    echo "HELM_DIR 1: " + ${HELM_DIR}
-            HELM_DIR = sh 'pwd'	
-	    echo "HELM_DIR 2: " + ${HELM_DIR}
+	    workingDirectory = sh 'pwd'
+             echo "workingDirectory 2: " + workingDirectory		
             def imageTag = null
             imageTag = gitCommit
             sh """
             #!/bin/bash
-	    echo "workingDirectory 2: " + workingDirectory
+	    echo "workingDirectory 3: " + workingDirectory
 	    echo "Current directoy: "
 	    pwd
 	    ls -l
