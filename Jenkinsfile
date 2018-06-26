@@ -1,8 +1,3 @@
-def workingDirectory = '.'
-environment {
-        HELM_DIR = '/home/jenkins/workspace'
-}
-
 def volumes = [ hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock') ]
 volumes += secretVolume(secretName: 'microclimate-registry-secret', mountPath: '/jenkins_docker_sec')
 podTemplate(label: 'icp-liberty-build',
@@ -24,15 +19,12 @@ podTemplate(label: 'icp-liberty-build',
             imageTag = gitCommit
             sh """
             #!/bin/bash
-	    echo "workingDirectory 3: " + workingDirectory
-	    echo "Current directoy: "
 	    pwd
 	    ls -l
             echo "imageTag: ${imageTag}"
             echo "BUILD_NUMBER: ${BUILD_NUMBER}"
 	    echo "WORKSPACE: ${WORKSPACE}"
             """
-
 	    step([$class: 'UCDeployPublisher',
 	            siteName: 'UCD-Server',
 	            component: [
@@ -45,7 +37,7 @@ podTemplate(label: 'icp-liberty-build',
 	            	],
 	            	delivery: [
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-	                    pushVersion: 'Jenkins:${BUILD_NUMBER}',
+	                    pushVersion: '${BUILD_NUMBER}',
 			    baseDir: 'workspace/JenkinsUCDtest_master-GSJH5RUKHTMOJOZ56VZPJHYWVWHRTNGSXAWNZC7U3VUJCVM4XMDQ/chart/jenkinstest',
 	                    fileIncludePatterns: '/**',
 	                    fileExcludePatterns: '',
@@ -54,8 +46,13 @@ podTemplate(label: 'icp-liberty-build',
 	                    pushIncremental: false
 	                ]			    
 	            ]
-             ])
-		
+             ])	
+				
+	}     	    
+
+    }
+	
+   node {
 	    step([$class: 'UCDeployPublisher',
 	            siteName: 'UCD-Server',
 	            component: [
@@ -70,19 +67,11 @@ podTemplate(label: 'icp-liberty-build',
 	                	$class: 'com.urbancode.jenkins.plugins.ucdeploy.ProcessHelper$CreateProcessBlock',
 	                        processComponent: 'Deploy'
 	            	    ],
-	           	    deployVersions: 'Jenkins:${BUILD_NUMBER}',
+	           	    deployVersions: '${BUILD_NUMBER}',
 	                    deployOnlyChanged: false
         		]
 			    
 	            ]
-             ])		
-		
-		
-	}     
-
-	    
-
-	    
-
-    }
+             ])
+	}
 }
