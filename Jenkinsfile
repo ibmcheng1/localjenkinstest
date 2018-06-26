@@ -57,27 +57,30 @@ podTemplate(label: 'icp-liberty-build',
         	])
 		
 	}     
-        
-        step([$class: 'UCDeployPublisher',
-        		siteName: 'UCD-Server',
-        		component: [
-            		$class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-            		componentName: 'JenkinsTest',
-        		],
-        		deploy: [
-           			$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeployHelper$DeployBlock',
-           			deployApp: 'JenkinsTestApp',
-            		deployEnv: 'Test',
-            		deployProc: 'Deploy Application'
-            		createProcess: [
-                		$class: 'com.urbancode.jenkins.plugins.ucdeploy.ProcessHelper$CreateProcessBlock',
-                		processComponent: 'Deploy'
-            		],
-            		
-           			deployVersions: 'Jenkins:${BUILD_NUMBER}',
-           			deployOnlyChanged: false
-        		]
+       
+    	step([$class: 'UCDeployPublisher',
+        	siteName: 'UCD-Server',
+        	component: [
+            	$class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
+            	componentName: 'JenkinsTest'
+        	],
+        	deploy: [
+	            $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeployHelper$DeployBlock',
+	            deployApp: 'JenkinsTestApp',
+	            deployEnv: 'Dev',
+	            deployProc: 'Deploy Application',
+	            createProcess: [
+	                $class: 'com.urbancode.jenkins.plugins.ucdeploy.ProcessHelper$CreateProcessBlock',
+	                processComponent: 'Deploy'
+	            ],
+	            deployVersions: 'Jenkins:${BUILD_NUMBER}',
+	            deployOnlyChanged: false
+        	]
     	])
+	    
+	    
+
+	    
 
     }
 }
