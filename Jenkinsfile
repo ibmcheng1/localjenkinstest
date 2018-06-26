@@ -52,8 +52,7 @@ podTemplate(label: 'icp-liberty-build',
 	                  
 	                    pushDescription: 'Pushed from Jenkins',
 	                    pushIncremental: false
-	                ]
-			 
+	                ],	 
 			deploy: [
 	            	    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeployHelper$DeployBlock',
 	            	    deployApp: 'JenkinsTestApp',
