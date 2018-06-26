@@ -12,20 +12,35 @@ podTemplate(label: 'icp-liberty-build',
           gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
           echo "checked out git commit ${gitCommit}"
         }
-         
-        stage ('Get Environment Information') {
+ 
+	            stage ('Get Environment Information') {
             def imageTag = null
             imageTag = gitCommit
             sh """
             #!/bin/bash
+            echo "imageTag: ${imageTag}"
             echo "checking file path"
+            echo 
             pwd
             ls -l
             echo "finished"
             """
         }
-	    
+        
+        
         stage ('Push to UCD...') {
+            def imageTag = null
+            imageTag = gitCommit
+            sh """
+            #!/bin/bash
+            echo "imageTag: ${imageTag}"
+            echo "checking file path"
+            echo 
+            pwd
+            ls -l
+            echo "finished"
+            """
+        
        		step([$class: 'UCDeployPublisher',
 	            siteName: 'UCD-Server',
 	            component: [
@@ -38,7 +53,7 @@ podTemplate(label: 'icp-liberty-build',
 	                ],
 	                delivery: [
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-	                    pushVersion: '${gitCommit}',
+	                    pushVersion: '${imageTag}',
 	                    baseDir: '.',
 	                    fileIncludePatterns: 'chart/*',
 	                    fileExcludePatterns: '',
@@ -48,7 +63,9 @@ podTemplate(label: 'icp-liberty-build',
 	                ]
 	            ]
         	])
-   	}       
+   		}     
+
+ 
 	    
     }
 }
