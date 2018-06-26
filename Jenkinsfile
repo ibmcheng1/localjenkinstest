@@ -19,13 +19,7 @@ podTemplate(label: 'icp-liberty-build',
           echo "checked out git commit ${gitCommit}"
         }
  
-        stage ('Push to UCD...') {
-	    echo "workingDirectory 1: " + workingDirectory
-	    workingDirectory = sh 'pwd'
-            echo "workingDirectory 2: " + workingDirectory
-            sh 'printenv'
-	    echo "HELM_DIR 1: " + ${HELM_DIR}
-		
+        stage ('Push to UCD...') {		
             def imageTag = null
             imageTag = gitCommit
             sh """
@@ -51,7 +45,7 @@ podTemplate(label: 'icp-liberty-build',
 	                delivery: [
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 	                    pushVersion: '${BUILD_NUMBER}',
-	                    baseDir: workingDirectory,
+			    baseDir: '${WORKSPACE}/chart/jenkinstest',
 	                    fileIncludePatterns: '/**',
 	                    fileExcludePatterns: '',
 	                    pushProperties: 'jenkins.server=Local',
