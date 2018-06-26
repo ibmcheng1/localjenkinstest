@@ -25,5 +25,30 @@ podTemplate(label: 'icp-liberty-build',
             """
         }
 	    
+        stage ('Push to UCD...') {
+       		step([$class: 'UCDeployPublisher',
+	            siteName: 'UCD-Server',
+	            component: [
+	                $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
+	                componentName: 'JenkinsTest',
+	                createComponent: [
+	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
+	                    componentTemplate: 'HelmChartTemplate',
+	                	componentApplication: 'JenkinsTestApp'
+	                ],
+	                delivery: [
+	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
+	                    pushVersion: '${gitCommit}',
+	                    baseDir: '.',
+	                    fileIncludePatterns: 'chart/*',
+	                    fileExcludePatterns: '',
+	                    pushProperties: 'jenkins.server=Local\njenkins.reviewed=false',
+	                    pushDescription: 'Pushed from Jenkins',
+	                    pushIncremental: false
+	                ]
+	            ]
+        	])
+   	}       
+	    
     }
 }
