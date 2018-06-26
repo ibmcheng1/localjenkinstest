@@ -19,12 +19,12 @@ podTemplate(label: 'icp-liberty-build',
         }
  
         stage ('Push to UCD...') {
-	    echo "workingDirectory: " + workingDirectory	
+	    echo "workingDirectory 1: " + workingDirectory	
             def imageTag = null
             imageTag = gitCommit
             sh """
             #!/bin/bash
-	    echo "workingDirectory: " + workingDirectory
+	    echo "workingDirectory 2: " + workingDirectory
 	    echo "Current directoy: "
 	    pwd
 	    ls -l
@@ -58,6 +58,6 @@ podTemplate(label: 'icp-liberty-build',
 	}     
         
     
-workingDirectory
+
     }
 }
