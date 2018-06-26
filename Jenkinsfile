@@ -50,7 +50,7 @@ podTemplate(label: 'icp-liberty-build',
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 	                    pushVersion: '${BUILD_NUMBER}',
 	                    baseDir: '.',
-	                    fileIncludePatterns: 'workspace/*/**',
+	                    fileIncludePatterns: 'workspace/*/chart/jenkinstest/**',
 	                    fileExcludePatterns: '',
 	                   
 	                    pushDescription: 'Pushed from Jenkins',
