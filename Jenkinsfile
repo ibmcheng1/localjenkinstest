@@ -30,6 +30,7 @@ podTemplate(label: 'icp-liberty-build',
 	    ls -l
             echo "imageTag: ${imageTag}"
             echo "BUILD_NUMBER: ${BUILD_NUMBER}"
+	    echo "WORKSPACE: ${WORKSPACE}"
             """
 
 	    step([$class: 'UCDeployPublisher',
