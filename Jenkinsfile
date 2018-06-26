@@ -46,7 +46,7 @@ podTemplate(label: 'icp-liberty-build',
 	                delivery: [
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 	                    pushVersion: '${BUILD_NUMBER}',
-			    baseDir: '${WORKSPACE}/chart/jenkinstest',
+			    baseDir: '../../(sh(${WORKSPACE}))/chart/jenkinstest',
 	                    fileIncludePatterns: '/**',
 	                    fileExcludePatterns: '',
 	                    pushProperties: 'jenkins.server=Local',
