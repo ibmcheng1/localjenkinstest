@@ -52,7 +52,15 @@ podTemplate(label: 'icp-liberty-build',
 	                  
 	                    pushDescription: 'Pushed from Jenkins',
 	                    pushIncremental: false
-	                ],	 
+	                ]			    
+	            ]
+             ])
+		
+	    step([$class: 'UCDeployPublisher',
+	            siteName: 'UCD-Server',
+	            component: [
+	                $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
+	                componentName: 'JenkinsTest',
 			deploy: [
 	            	    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeployHelper$DeployBlock',
 	            	    deployApp: 'JenkinsTestApp',
@@ -67,7 +75,8 @@ podTemplate(label: 'icp-liberty-build',
         		]
 			    
 	            ]
-             ])
+             ])		
+		
 		
 	}     
 
