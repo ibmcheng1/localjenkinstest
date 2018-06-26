@@ -27,18 +27,13 @@ podTemplate(label: 'icp-liberty-build',
             """
         }
         
-        
         stage ('Push to UCD...') {
             def imageTag = null
             imageTag = gitCommit
             sh """
             #!/bin/bash
             echo "imageTag: ${imageTag}"
-            echo "checking file path"
-            echo 
-            pwd
-            ls -l
-            echo "finished"
+            echo "BUILD_NUMBER: ${BUILD_NUMBER}"
             """
         
        		step([$class: 'UCDeployPublisher',
@@ -53,7 +48,7 @@ podTemplate(label: 'icp-liberty-build',
 	                ],
 	                delivery: [
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-	                    pushVersion: '${imageTag}',
+	                    pushVersion: '${BUILD_NUMBER}',
 	                    baseDir: '.',
 	                    fileIncludePatterns: 'chart/*',
 	                    fileExcludePatterns: '',
@@ -64,7 +59,8 @@ podTemplate(label: 'icp-liberty-build',
 	            ]
         	])
    		}     
-
+        
+    
  
 	    
     }
