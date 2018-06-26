@@ -35,8 +35,8 @@ podTemplate(label: 'icp-liberty-build',
             echo "imageTag: ${imageTag}"
             echo "BUILD_NUMBER: ${BUILD_NUMBER}"
             """
-        
-       		step([$class: 'UCDeployPublisher',
+
+	    step([$class: 'UCDeployPublisher',
 	            siteName: 'UCD-Server',
 	            component: [
 	                $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
@@ -50,7 +50,7 @@ podTemplate(label: 'icp-liberty-build',
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 	                    pushVersion: '${BUILD_NUMBER}',
 	                    baseDir: '.',
-	                    fileIncludePatterns: 'chart/*',
+	                    fileIncludePatterns: './chart/*',
 	                    fileExcludePatterns: '',
 	                    pushProperties: 'jenkins.server=Local\njenkins.reviewed=false',
 	                    pushDescription: 'Pushed from Jenkins',
@@ -58,7 +58,8 @@ podTemplate(label: 'icp-liberty-build',
 	                ]
 	            ]
         	])
-   		}     
+		
+	}     
         
     
  
