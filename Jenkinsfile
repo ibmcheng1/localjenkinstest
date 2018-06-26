@@ -8,7 +8,6 @@ podTemplate(label: 'icp-liberty-build',
     node ('icp-liberty-build') {
         def gitCommit
         stage ('Extract') {
-          echo "workingDirectory: " + workingDirectory
           checkout scm
           gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
           echo "checked out git commit ${gitCommit}"
