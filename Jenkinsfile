@@ -13,7 +13,6 @@ podTemplate(label: 'icp-liberty-build',
         def gitCommit
         stage ('Extract') {
           echo "workingDirectory: " + workingDirectory
-	  echo "HELM_DIR: " + HELM_DIR
           checkout scm
           gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
           echo "checked out git commit ${gitCommit}"
