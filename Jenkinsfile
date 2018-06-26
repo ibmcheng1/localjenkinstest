@@ -52,7 +52,7 @@ podTemplate(label: 'icp-liberty-build',
 	                    baseDir: '.',
 	                    fileIncludePatterns: './chart/*',
 	                    fileExcludePatterns: '',
-	                    pushProperties: 'jenkins.server=Local\njenkins.reviewed=false',
+	                   
 	                    pushDescription: 'Pushed from Jenkins',
 	                    pushIncremental: false
 	                ]
