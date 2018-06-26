@@ -45,14 +45,9 @@ podTemplate(label: 'icp-liberty-build',
 	                    pushIncremental: false
 	                ]			    
 	            ]
-             ])	
-				
-	}     	    
-
-    }
+             ])
 	
-   node {
-	    step([$class: 'UCDeployPublisher',
+	     step([$class: 'UCDeployPublisher',
 	            siteName: 'UCD-Server',
 	            component: [
 	                $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
@@ -66,11 +61,16 @@ podTemplate(label: 'icp-liberty-build',
 	                	$class: 'com.urbancode.jenkins.plugins.ucdeploy.ProcessHelper$CreateProcessBlock',
 	                        processComponent: 'Deploy'
 	            	    ],
-	           	    deployVersions: '${BUILD_NUMBER}',
+	           	    deployVersions: '34',
 	                    deployOnlyChanged: false
         		]
 			    
 	            ]
-             ])
-	}
+             ])	
+				
+	}     	    
+
+    }
+	
+  
 }
