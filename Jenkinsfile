@@ -49,7 +49,7 @@ podTemplate(label: 'icp-liberty-build',
 			    baseDir: 'workspace/JenkinsUCDtest_master-GSJH5RUKHTMOJOZ56VZPJHYWVWHRTNGSXAWNZC7U3VUJCVM4XMDQ/chart/jenkinstest',
 	                    fileIncludePatterns: '/**',
 	                    fileExcludePatterns: '',
-	                    pushProperties: 'jenkins.server=Local',
+	                  
 	                    pushDescription: 'Pushed from Jenkins',
 	                    pushIncremental: false
 	                ]
