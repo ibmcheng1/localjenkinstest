@@ -1,7 +1,4 @@
-define {
-       def workingDirectory = sh 'pwd'
-}
-
+def workingDirectory = sh 'pwd'
 def volumes = [ hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock') ]
 volumes += secretVolume(secretName: 'microclimate-registry-secret', mountPath: '/jenkins_docker_sec')
 podTemplate(label: 'icp-liberty-build',
