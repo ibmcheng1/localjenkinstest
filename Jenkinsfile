@@ -38,7 +38,7 @@
 	                    pushIncremental: false
 	                ]			    
 	            ]
-             ])
+             ])/var/lib/jenkins/workspace/JenkinsUCDtest_master-GSJH5RUKHTMOJOZ56VZPJHYWVWHRTNGSXAWNZC7U3VUJCVM4XMDQ
 	
 	     step([$class: 'UCDeployPublisher',
 	            siteName: 'UCD-Server',
