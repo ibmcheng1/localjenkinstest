@@ -1,9 +1,3 @@
-def volumes = [ hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock') ]
-volumes += secretVolume(secretName: 'microclimate-registry-secret', mountPath: '/jenkins_docker_sec')
-podTemplate(label: 'icp-liberty-build',
-            nodeSelector: 'beta.kubernetes.io/arch=amd64',
-    volumes: volumes
-)
 {
     node ('icp-liberty-build') {
         def gitCommit
