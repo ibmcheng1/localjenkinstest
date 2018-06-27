@@ -1,5 +1,4 @@
-{
-    node ('icp-liberty-build') {
+    node {
         def gitCommit
         stage ('Extract') {
           checkout scm
@@ -66,5 +65,3 @@
 
     }
 	
-  
-}
