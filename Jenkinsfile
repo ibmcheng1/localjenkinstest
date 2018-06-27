@@ -61,7 +61,7 @@ podTemplate(label: 'icp-liberty-build',
 	                	$class: 'com.urbancode.jenkins.plugins.ucdeploy.ProcessHelper$CreateProcessBlock',
 	                        processComponent: 'Deploy'
 	            	    ],
-	           	    deployVersions: '34',
+	           	    deployVersions: '${BUILD_NUMBER}',
 	                    deployOnlyChanged: false
         		]
 			    
