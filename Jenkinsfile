@@ -13,6 +13,8 @@
 	    def IMAGE_TAG=gitCommit
 	    def TARGET_FILE="values.yaml"
 	    def BUILD_PROPERTIES_FILE="build.properties"
+	    def TAG_OLD_String="@@@TAG@@@"
+	    def TAG_NEW_String=gitCommit
             sh """
             #!/bin/bash
 	    echo "---------------------------"
@@ -31,9 +33,7 @@
 
 		echo "update TAG before: "
 		cat ${TARGET_FILE} | grep tag:
-
-		TAG_OLD_String="@@@TAG@@@"
-		TAG_NEW_String=${IMAGE_TAG}
+		
 		sed -e "s|${TAG_OLD_String}|${TAG_NEW_String}|g" ${TARGET_FILE} > ${TARGET_FILE}.temp 
 		cp ${TARGET_FILE}.temp ${TARGET_FILE}
 
