@@ -19,6 +19,7 @@
             sh """
             #!/bin/bash
 	    echo "---------------------------"
+	    echo "UCD_DELIVERY_BASE_DIR : ${UCD_DELIVERY_BASE_DIR}"
 	    echo "Current Directory:"
 	    pwd
 	    echo "Current Directory File Structure:"
@@ -71,7 +72,7 @@
 	            	delivery: [
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 			    pushVersion: '${BRANCH_NAME}.${BUILD_NUMBER}',
-			    baseDir: '{WORKSPACE}/${OFFSET_DIR}',
+			    baseDir: '${UCD_DELIVERY_BASE_DIR}',
 	                    fileIncludePatterns: '/**',
 	                    fileExcludePatterns: '',
 	                  
