@@ -10,10 +10,9 @@
             def imageTag = null
             imageTag = gitCommit
 	    def OFFSET_DIR="chart/jenkinstest"
-	    def IMAGE_TAG=${imageTag}
+	    def IMAGE_TAG=gitCommit
 	    def TARGET_FILE="values.yaml"
 	    def BUILD_PROPERTIES_FILE="build.properties"
-	    def TARGET_BUILD_PROPERTIES_FILE="{WORKSPACE}/${OFFSET_DIR}/${BUILD_PROPERTIES_FILE}"
             sh """
             #!/bin/bash
 	    echo "---------------------------"
@@ -29,7 +28,6 @@
 	    	cd ./${OFFSET_DIR}	    
 		echo IMAGE_TAG = ${IMAGE_TAG}
 		echo TARGET_FILE = ${TARGET_FILE}
-		echo TARGET_BUILD_PROPERTIES_FILE = ${TARGET_BUILD_PROPERTIES_FILE}
 
 		echo "update TAG before: "
 		cat ${TARGET_FILE} | grep tag:
