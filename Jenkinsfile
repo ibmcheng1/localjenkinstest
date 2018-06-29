@@ -15,6 +15,7 @@
 	    def BUILD_PROPERTIES_FILE="build.properties"
 	    def TAG_OLD_String="@@@TAG@@@"
 	    def TAG_NEW_String=gitCommit
+            def UCD_DELIVERY_BASE_DIR=WORKSPACE + "/" + OFFSET_DIR		
             sh """
             #!/bin/bash
 	    echo "---------------------------"
@@ -53,8 +54,8 @@
 		cat ${BUILD_PROPERTIES_FILE}
 
 		cd ${WORKSPACE}
-		echo "CURRENT Directoy: ${PWD}"
-
+		echo "CURRENT Directoy:"
+		pwd
 	    echo "---------------------------"
             """
 	    step([$class: 'UCDeployPublisher',
