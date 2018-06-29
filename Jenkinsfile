@@ -48,7 +48,7 @@
 		fi
 
 		echo "Update ${BUILD_PROPERTIES_FILE} -> IMAGE_TAG: ${IMAGE_TAG}"
-		echo "IMAGE_TAG: ${IMAGE_TAG}" > ${BUILD_PROPERTIES_FILE}
+		echo "IMAGE_TAG=${IMAGE_TAG}" > ${BUILD_PROPERTIES_FILE}
 		echo "After Update:"
 		cat ${BUILD_PROPERTIES_FILE}
 
@@ -69,8 +69,8 @@
 	            	],
 	            	delivery: [
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-	                    pushVersion: '${BUILD_NUMBER}',
-			    baseDir: '/var/lib/jenkins/workspace/JenkinsUCDtest_master-GSJH5RUKHTMOJOZ56VZPJHYWVWHRTNGSXAWNZC7U3VUJCVM4XMDQ/chart/jenkinstest',
+			    pushVersion: '${BRANCH_NAME}.${BUILD_NUMBER}',
+			    baseDir: '{WORKSPACE}/${OFFSET_DIR}',
 	                    fileIncludePatterns: '/**',
 	                    fileExcludePatterns: '',
 	                  
@@ -88,7 +88,7 @@
                 deployApp: 'JenkinsTestApp',
                 deployEnv: 'Dev',
                 deployProc: 'Deploy Application',
-                deployVersions: 'JenkinsTest:${BUILD_NUMBER}',
+                deployVersions: 'JenkinsTest:${BRANCH_NAME}.${BUILD_NUMBER}',
                 deployOnlyChanged: false
             ]
         ])
