@@ -1,8 +1,10 @@
+environment {
+	UCD_DELIVERY_BASE_DIR = "UCD_DELIVERY_BASE_DIR_String"
+}
+
+{
     node {
-        def gitCommit
-	def OFFSET_DIR="chart/jenkinstest"
-	def UCD_DELIVERY_BASE_DIR
-    
+        def gitCommit    
         stage ('Extract') {
           checkout scm
           gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
@@ -12,6 +14,7 @@
         stage ('Push to UCD...') {		
             def imageTag = gitCommit
 	    def IMAGE_TAG=gitCommit
+	    def OFFSET_DIR="chart/jenkinstest"		
 	    def TARGET_FILE="values.yaml"
 	    def BUILD_PROPERTIES_FILE="build.properties"
 	    def TAG_OLD_String="@@@TAG@@@"
@@ -100,4 +103,4 @@
 	}     	    
 
     }
-	
+}	
