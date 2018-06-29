@@ -1,5 +1,8 @@
     node {
         def gitCommit
+	def OFFSET_DIR="chart/jenkinstest"
+	def UCD_DELIVERY_BASE_DIR
+    
         stage ('Extract') {
           checkout scm
           gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
@@ -7,15 +10,13 @@
         }
 	    
         stage ('Push to UCD...') {		
-            def imageTag = null
-            imageTag = gitCommit
-	    def OFFSET_DIR="chart/jenkinstest"
+            def imageTag = gitCommit
 	    def IMAGE_TAG=gitCommit
 	    def TARGET_FILE="values.yaml"
 	    def BUILD_PROPERTIES_FILE="build.properties"
 	    def TAG_OLD_String="@@@TAG@@@"
 	    def TAG_NEW_String=gitCommit
-            def UCD_DELIVERY_BASE_DIR=WORKSPACE + "/" + OFFSET_DIR		
+            UCD_DELIVERY_BASE_DIR=WORKSPACE + "/" + OFFSET_DIR		
             sh """
             #!/bin/bash
 	    echo "---------------------------"
