@@ -9,11 +9,11 @@
         stage ('Push to UCD...') {		
             def imageTag = null
             imageTag = gitCommit
-	    def OFFSET_DIR=chart/jenkinstest
+	    def OFFSET_DIR="chart/jenkinstest"
 	    def IMAGE_TAG=${imageTag}
-	    def TARGET_FILE=values.yaml
-	    def BUILD_PROPERTIES_FILE=build.properties
-	    def TARGET_BUILD_PROPERTIES_FILE=${WORKSPACE}/${OFFSET_DIR}/${BUILD_PROPERTIES_FILE}
+	    def TARGET_FILE="values.yaml"
+	    def BUILD_PROPERTIES_FILE="build.properties"
+	    def TARGET_BUILD_PROPERTIES_FILE="{WORKSPACE}/${OFFSET_DIR}/${BUILD_PROPERTIES_FILE}"
             sh """
             #!/bin/bash
 	    echo "---------------------------"
