@@ -1,10 +1,7 @@
-environment {
-	UCD_DELIVERY_BASE_DIR = "UCD_DELIVERY_BASE_DIR_String"
-}
-
 {
     node {
-        def gitCommit    
+        def gitCommit
+	def UCD_DELIVERY_BASE_DIR    
         stage ('Extract') {
           checkout scm
           gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
@@ -76,7 +73,7 @@ environment {
 	            	delivery: [
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 			    pushVersion: '${BRANCH_NAME}.${BUILD_NUMBER}',
-			    baseDir: '${UCD_DELIVERY_BASE_DIR}',
+			    baseDir: '${WORKSPACE}/chart/jenkinstest',
 	                    fileIncludePatterns: '/**',
 	                    fileExcludePatterns: '',
 	                  
