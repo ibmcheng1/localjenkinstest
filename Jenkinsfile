@@ -9,6 +9,7 @@
         stage ('Push to UCD...') {		
             def imageTag = null
             imageTag = gitCommit
+	     			
             sh """
             #!/bin/bash
 	    pwd
@@ -20,9 +21,8 @@
 	    WORKING_DIR=${PWD}
 	    OFFSET_DIR=chart/jenkinstest
 
-	    echo WORKING_DIR = $WORKING_DIR
-	    echo OFFSET_DIR = $OFFSET_DIR
-	    echo CURRENT_HOST = $CURRENT_HOST
+	    echo WORKING_DIR = ${WORKING_DIR}
+	    echo OFFSET_DIR = ${OFFSET_DIR}
 
 	    cd ./${OFFSET_DIR}
 	    echo "CURRENT Directoy: ${PWD}"	    
