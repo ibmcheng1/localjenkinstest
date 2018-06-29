@@ -1,4 +1,4 @@
-{
+
     node {
         def gitCommit
 	def UCD_DELIVERY_BASE_DIR    
@@ -100,4 +100,4 @@
 	}     	    
 
     }
-}	
+	
