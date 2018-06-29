@@ -52,7 +52,7 @@
 		echo "After Update:"
 		cat ${BUILD_PROPERTIES_FILE}
 
-		cd ${WORKING_DIR}
+		cd ${WORKSPACE}
 		echo "CURRENT Directoy: ${PWD}"
 
 	    echo "---------------------------"
