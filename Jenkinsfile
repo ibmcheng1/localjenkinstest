@@ -14,6 +14,12 @@ pipeline {
         
         UCD_DELIVERY_BASE_DIR = null
         gitCommit = null
+        
+ 		OFFSET_DIR="chart/jenkinstest"		
+		TARGET_FILE="values.yaml"
+		BUILD_PROPERTIES_FILE="build.properties"
+		TAG_OLD_String="@@@TAG@@@"
+      
     }
 
     parameters {
@@ -50,26 +56,22 @@ pipeline {
 	        		checkout scm
 	           		gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
 	          		echo "checked out git commit ${gitCommit}"
+	          		imageTag = gitCommit
+					IMAGE_TAG=gitCommit
+	          		TAG_NEW_String=gitCommit 
 	          	}       	    
 			}
         }
 	    
         stage ('Push to UCD...') {
         	steps {
-        		step {
-        		    def imageTag = gitCommit
-				    def IMAGE_TAG=gitCommit
-				    def OFFSET_DIR="chart/jenkinstest"		
-				    def TARGET_FILE="values.yaml"
-				    def BUILD_PROPERTIES_FILE="build.properties"
-				    def TAG_OLD_String="@@@TAG@@@"
-				    def TAG_NEW_String=gitCommit
-				    UCD_DELIVERY_BASE_DIR=WORKSPACE + "/" + OFFSET_DIR      		    
-        		}
-        		
-				script {
+ 				script {
+					UCD_DELIVERY_BASE_DIR = WORKSPACE + "/" + OFFSET_DIR
 				    echo "-------------------------"
-	          		echo "UCD_DELIVERY_BASE_DIR = " + ${UCD_DELIVERY_BASE_DIR}
+	          		echo "imageTag = ${imageTag}" 
+	          		echo "IMAGE_TAG = ${IMAGE_TAG}"
+	          		echo "TAG_NEW_String = ${TAG_NEW_String}"
+	          		echo "UCD_DELIVERY_BASE_DIR = ${UCD_DELIVERY_BASE_DIR}"
 	          		echo "-------------------------"
 	          	} 
  
