@@ -71,6 +71,7 @@ pipeline {
 	          		echo "imageTag = ${imageTag}" 
 	          		echo "IMAGE_TAG = ${IMAGE_TAG}"
 	          		echo "TAG_NEW_String = ${TAG_NEW_String}"
+	          		echo "WORKSPACE = ${WORKSPACE}"
 	          		echo "UCD_DELIVERY_BASE_DIR = ${UCD_DELIVERY_BASE_DIR}"
 	          		echo "-------------------------"
 	          	 
