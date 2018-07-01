@@ -73,7 +73,7 @@ pipeline {
 	          		echo "TAG_NEW_String = ${TAG_NEW_String}"
 	          		echo "UCD_DELIVERY_BASE_DIR = ${UCD_DELIVERY_BASE_DIR}"
 	          		echo "-------------------------"
-	          	} 
+	          	 
  
 			    step([$class: 'UCDeployPublisher',
 			            siteName: 'UCD-Server',
@@ -99,7 +99,9 @@ pipeline {
 			                	pushIncremental: false
 			                ]			    
 			            ]
-			     ])     	    
+			     ])
+			     
+			     }     	    
         	}
         					
 		}
