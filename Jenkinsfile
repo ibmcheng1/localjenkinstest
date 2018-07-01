@@ -91,7 +91,7 @@ pipeline {
 					    		pushVersion: '${BRANCH_NAME}.${BUILD_NUMBER}',
 					    		//baseDir: '/var/lib/jenkins/workspace/JenkinsUCDtest_master-GSJH5RUKHTMOJOZ56VZPJHYWVWHRTNGSXAWNZC7U3VUJCVM4XMDQ/chart/jenkinstest',
 					    		
-					    		baseDir: '${WORKSPACE}',
+					    		baseDir: '${OFFSET_DIR}',
 		                	
 			                	fileIncludePatterns: '/**',
 			                	fileExcludePatterns: '',
