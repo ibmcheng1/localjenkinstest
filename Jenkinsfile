@@ -46,11 +46,12 @@ pipeline {
 		    
         stage ('Extract') {
         	steps {
-        		checkout scm
-          		gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-          		echo "checked out git commit ${gitCommit}"       	    
-        	}
-
+       			script {
+	        		checkout scm
+	           		gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+	          		echo "checked out git commit ${gitCommit}"
+	          	}       	    
+			}
         }
 	    
         stage ('Push to UCD...') {
