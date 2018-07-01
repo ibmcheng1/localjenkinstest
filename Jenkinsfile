@@ -58,9 +58,8 @@ pipeline {
 	    def TAG_OLD_String="@@@TAG@@@"
 	    def TAG_NEW_String=gitCommit
         
-        UCD_DELIVERY_BASE_DIR=WORKSPACE + "/" + OFFSET_DIR	
+        UCD_DELIVERY_BASE_DIR=WORKSPACE + "/" + OFFSET_DIR
         	
-        
         sh """
         #!/bin/bash
 	    echo "---------------------------"
