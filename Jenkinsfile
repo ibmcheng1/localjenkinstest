@@ -68,7 +68,9 @@ pipeline {
         		}
         		
 				script {
+				    echo "-------------------------"
 	          		echo "UCD_DELIVERY_BASE_DIR = " + ${UCD_DELIVERY_BASE_DIR}
+	          		echo "-------------------------"
 	          	} 
  
 			    step([$class: 'UCDeployPublisher',
