@@ -18,8 +18,8 @@ pipeline {
 		BUILD_PROPERTIES_FILE="build.properties"
 		TAG_OLD_String="@@@TAG@@@"
       
-        UCD_APP_NAME = "JenkinsTest"
-        UCD_COMPONENT_NAME = "JenkinsTest"
+        UCD_APP_NAME = "LocalJenkinsTest"
+        UCD_COMPONENT_NAME = "LocalJenkinsTest"
         UCD_COMPONENT_TEMPLATE = "HelmChartTemplate"
         UCD_DELIVERY_BASE_DIR = null
         UCD_DELIVERY_PUSH_VERSION = null       
