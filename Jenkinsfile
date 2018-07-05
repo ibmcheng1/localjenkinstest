@@ -12,14 +12,18 @@ pipeline {
         DEPLOY_PROD = false
         PARAMETERS_FILE = "${JENKINS_HOME}/parameters.groovy"
         
-        UCD_DELIVERY_BASE_DIR = null
         gitCommit = null
-        
  		OFFSET_DIR="chart/jenkinstest"		
 		TARGET_FILE="values.yaml"
 		BUILD_PROPERTIES_FILE="build.properties"
 		TAG_OLD_String="@@@TAG@@@"
       
+        UCD_APP_NAME = "JenkinsTest"
+        UCD_COMPONENT_NAME = "JenkinsTest"
+        UCD_DELIVERY_BASE_DIR = null       
+        UCD_Deploy_Env = "Dev"
+        UCD_Deploy_Process = "Deploy"
+        UCD_Deploy_Version = null              
     }
 
     parameters {
@@ -67,14 +71,22 @@ pipeline {
         	steps {
  				script {
 					UCD_DELIVERY_BASE_DIR = WORKSPACE + "/" + OFFSET_DIR
+					UCD_Deploy_Version = UCD_COMPONENT_NAME + ":" + BRANCH_NAME + "." + BUILD_NUMBER
+				    echo "-------------------------"
+				    echo "Environment Information: "
 				    echo "-------------------------"
 	          		echo "imageTag = ${imageTag}" 
 	          		echo "IMAGE_TAG = ${IMAGE_TAG}"
 	          		echo "TAG_NEW_String = ${TAG_NEW_String}"
 	          		echo "WORKSPACE = ${WORKSPACE}"
+	          		echo "UCD_APP_NAME = ${UCD_APP_NAME}"
+	          		echo "UCD_COMPONENT_NAME = ${UCD_COMPONENT_NAME}"
+	          		echo "UCD_Deploy_Env = ${UCD_Deploy_Env}"
 	          		echo "UCD_DELIVERY_BASE_DIR = ${UCD_DELIVERY_BASE_DIR}"
+	          		echo "UCD_Deploy_Process = ${UCD_Deploy_Process}"
+	          		echo "UCD_Deploy_Version = ${UCD_Deploy_Version}"
 	          		echo "-------------------------"
-	          	 
+	          	} 
  
 			    step([$class: 'UCDeployPublisher',
 			            siteName: 'UCD-Server',
@@ -102,7 +114,18 @@ pipeline {
 			            ]
 			     ])
 			     
-			     }     	    
+			     step([$class: 'UCDeployPublisher',
+            		siteName: 'UCD-Server',
+            		deploy: [
+                		$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeployHelper$DeployBlock',
+                		deployApp: "${UCD_APP_NAME}",
+                		deployEnv: "${UCD_Deploy_Env}",
+                		deployProc: "${UCD_Deploy_Process}",
+                		deployVersions: "${UCD_COMPONENT_NAME}:${BRANCH_NAME}.${BUILD_NUMBER}",
+                		deployOnlyChanged: false
+            		]
+        		])
+			    		         	    
         	}
         					
 		}
