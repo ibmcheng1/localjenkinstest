@@ -84,7 +84,7 @@ pipeline {
 			                createComponent: [
 			                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 			                    componentTemplate: 'HelmChartTemplate',
-			               	    componentApplication: 'JenkinsTestApp'
+			               	    componentApplication: 'Jenkinstest'
 			            	],
 			            	delivery: [
 			                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
