@@ -20,7 +20,9 @@ pipeline {
       
         UCD_APP_NAME = "JenkinsTest"
         UCD_COMPONENT_NAME = "JenkinsTest"
-        UCD_DELIVERY_BASE_DIR = null       
+        UCD_COMPONENT_TEMPLATE = "HelmChartTemplate"
+        UCD_DELIVERY_BASE_DIR = null
+        UCD_DELIVERY_PUSH_VERSION = null       
         UCD_Deploy_Env = "Dev"
         UCD_Deploy_Process = "Deploy"
         UCD_Deploy_Version = null              
@@ -71,6 +73,7 @@ pipeline {
         	steps {
  				script {
 					UCD_DELIVERY_BASE_DIR = WORKSPACE + "/" + OFFSET_DIR
+					UCD_DELIVERY_PUSH_VERSION = BRANCH_NAME + "." + BUILD_NUMBER
 					UCD_Deploy_Version = UCD_COMPONENT_NAME + ":" + BRANCH_NAME + "." + BUILD_NUMBER
 				    echo "-------------------------"
 				    echo "Environment Information: "
@@ -83,6 +86,7 @@ pipeline {
 	          		echo "UCD_COMPONENT_NAME = ${UCD_COMPONENT_NAME}"
 	          		echo "UCD_Deploy_Env = ${UCD_Deploy_Env}"
 	          		echo "UCD_DELIVERY_BASE_DIR = ${UCD_DELIVERY_BASE_DIR}"
+	          		echo "UCD_DELIVERY_PUSH_VERSION = ${UCD_DELIVERY_PUSH_VERSION}"
 	          		echo "UCD_Deploy_Process = ${UCD_Deploy_Process}"
 	          		echo "UCD_Deploy_Version = ${UCD_Deploy_Version}"
 	          		echo "-------------------------"
@@ -92,17 +96,16 @@ pipeline {
 			            siteName: 'UCD-Server',
 			            component: [
 			                $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-			                componentName: 'JenkinsTest',
+			                componentName: "${UCD_COMPONENT_NAME}",
 			                createComponent: [
 			                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
-			                    componentTemplate: 'HelmChartTemplate',
-			               	    componentApplication: 'Jenkinstest'
+			                    componentTemplate: "${UCD_COMPONENT_TEMPLATE}",
+			               	    componentApplication: "${UCD_APP_NAME}"
 			            	],
 			            	delivery: [
 			                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-					    		pushVersion: '${BRANCH_NAME}.${BUILD_NUMBER}',
-					    		//baseDir: '/var/lib/jenkins/workspace/JenkinsUCDtest_master-GSJH5RUKHTMOJOZ56VZPJHYWVWHRTNGSXAWNZC7U3VUJCVM4XMDQ/chart/jenkinstest',
-					    		
+					    		pushVersion: "${UCD_DELIVERY_PUSH_VERSION}",
+					    		//baseDir: '/var/lib/jenkins/workspace/JenkinsUCDtest_master-GSJH5RUKHTMOJOZ56VZPJHYWVWHRTNGSXAWNZC7U3VUJCVM4XMDQ/chart/jenkinstest',					    		
 					    		baseDir: "${UCD_DELIVERY_BASE_DIR}",
 		                	
 			                	fileIncludePatterns: '/**',
@@ -121,7 +124,7 @@ pipeline {
                 		deployApp: "${UCD_APP_NAME}",
                 		deployEnv: "${UCD_Deploy_Env}",
                 		deployProc: "${UCD_Deploy_Process}",
-                		deployVersions: "${UCD_COMPONENT_NAME}:${BRANCH_NAME}.${BUILD_NUMBER}",
+                		deployVersions: "${UCD_Deploy_Version}",
                 		deployOnlyChanged: false
             		]
         		])
