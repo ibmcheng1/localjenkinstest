@@ -90,6 +90,18 @@ pipeline {
 	          		echo "UCD_Deploy_Process = ${UCD_Deploy_Process}"
 	          		echo "UCD_Deploy_Version = ${UCD_Deploy_Version}"
 	          		echo "-------------------------"
+	          		
+	          		sh """
+            		#!/bin/bash		
+					echo "update TAG before: "
+					cat ${TARGET_FILE} | grep tag:
+						          		
+	          		sed -i "s/@@@TAG@@@:${imageTag}/g" ${TARGET_FILE}
+	          		
+					echo "update TAG before: "
+					cat ${TARGET_FILE} | grep tag:	          		
+	          		"""
+	          		echo "-------------------------"
 	          	} 
  
 			    step([$class: 'UCDeployPublisher',
