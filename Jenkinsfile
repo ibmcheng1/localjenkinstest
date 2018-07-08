@@ -75,7 +75,7 @@ pipeline {
 					UCD_DELIVERY_BASE_DIR = WORKSPACE + "/" + OFFSET_DIR
 					UCD_DELIVERY_PUSH_VERSION = BRANCH_NAME + "." + BUILD_NUMBER
 					UCD_Deploy_Version = UCD_COMPONENT_NAME + ":" + BRANCH_NAME + "." + BUILD_NUMBER
-					TARGET_FILE =  WORKSPACE + "/" + TARGET_FILE
+					TARGET_FILE =  UCD_DELIVERY_BASE_DIR + "/" + TARGET_FILE
 				    echo "-------------------------"
 				    echo "Environment Information: "
 				    echo "-------------------------"
