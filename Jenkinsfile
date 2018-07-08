@@ -96,7 +96,7 @@ pipeline {
 					echo "update TAG before: "
 					cat ${TARGET_FILE} | grep tag:
 						          		
-	          		sed -i "s/@@@TAG@@@:${imageTag}/g" ${TARGET_FILE}
+	          		sed -i "s/@@@TAG@@@:${imageTag}/g" ${UCD_DELIVERY_BASE_DIR}/${TARGET_FILE}
 	          		
 					echo "update TAG before: "
 					cat ${TARGET_FILE} | grep tag:	          		
