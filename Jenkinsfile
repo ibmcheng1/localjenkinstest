@@ -75,6 +75,7 @@ pipeline {
 					UCD_DELIVERY_BASE_DIR = WORKSPACE + "/" + OFFSET_DIR
 					UCD_DELIVERY_PUSH_VERSION = BRANCH_NAME + "." + BUILD_NUMBER
 					UCD_Deploy_Version = UCD_COMPONENT_NAME + ":" + BRANCH_NAME + "." + BUILD_NUMBER
+					TARGET_FILE =  WORKSPACE + "/" + TARGET_FILE
 				    echo "-------------------------"
 				    echo "Environment Information: "
 				    echo "-------------------------"
@@ -89,14 +90,23 @@ pipeline {
 	          		echo "UCD_DELIVERY_PUSH_VERSION = ${UCD_DELIVERY_PUSH_VERSION}"
 	          		echo "UCD_Deploy_Process = ${UCD_Deploy_Process}"
 	          		echo "UCD_Deploy_Version = ${UCD_Deploy_Version}"
+	          		echo "TARGET_FILE = ${TARGET_FILE}"
 	          		echo "-------------------------"
 	          		
 	          		sh """
-            		#!/bin/bash		
+            		#!/bin/bash
+				    echo "Current Directory:"
+	    			pwd
+	    			echo "Current Directory File Structure:"
+	    			ls -l
+
+            		echo "Verify target file: ${TARGET_FILE}"
+            		ls -l ${TARGET_FILE}
+            				
 					echo "update TAG before: "
 					cat ${TARGET_FILE} | grep tag:
 						          		
-	          		sed -i "s/@@@TAG@@@:${imageTag}/g" ${UCD_DELIVERY_BASE_DIR}/${TARGET_FILE}
+	          		sed -i "s/@@@TAG@@@:${imageTag}/g" ${TARGET_FILE}
 	          		
 					echo "update TAG before: "
 					cat ${TARGET_FILE} | grep tag:	          		
