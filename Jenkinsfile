@@ -21,7 +21,7 @@
 	            siteName: 'UCD-Server',
 	            component: [
 	                $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-	                componentName: 'JenkinsTest',
+	                componentName: 'LocalJenkinsTest',
 	                createComponent: [
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
 	                    componentTemplate: 'HelmChartTemplate',
@@ -44,7 +44,7 @@
 	            siteName: 'UCD-Server',
 	            component: [
 	                $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-	                componentName: 'JenkinsTest',
+	                componentName: 'LocalJenkinsTest',
 			deploy: [
 	            	    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeployHelper$DeployBlock',
 	            	    deployApp: 'LocalJenkinsTest',
