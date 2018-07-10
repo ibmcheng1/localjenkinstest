@@ -30,7 +30,7 @@
 	            	delivery: [
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
 	                    pushVersion: '${BUILD_NUMBER}',
-			    		baseDir: 'workspace/JenkinsUCDtest_master-GSJH5RUKHTMOJOZ56VZPJHYWVWHRTNGSXAWNZC7U3VUJCVM4XMDQ/chart/jenkinstest',
+			    		baseDir: 'workspace/LocalJenkinsTest_master-VKVNYMIITIN4CETXSG7S7NRTCOTWOWAUEQBM6UNPPTQHLS6TM7TA/chart/jenkinstest',
 	                    fileIncludePatterns: '/**',
 	                    fileExcludePatterns: '',
 	                  
