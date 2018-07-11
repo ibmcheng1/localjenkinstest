@@ -49,7 +49,7 @@
 	            	    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeployHelper$DeployBlock',
 	            	    deployApp: 'LocalJenkinsTest',
 	                    deployEnv: 'Dev',
-	            	    deployProc: 'Deploy Application',
+	            	    deployProc: 'Deploy',
 	            	    createProcess: [
 	                	$class: 'com.urbancode.jenkins.plugins.ucdeploy.ProcessHelper$CreateProcessBlock',
 	                        processComponent: 'Deploy'
