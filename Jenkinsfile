@@ -50,11 +50,7 @@
 	            	    deployApp: 'LocalJenkinsTest',
 	                    deployEnv: 'Dev',
 	            	    deployProc: 'Deploy',
-	            	    createProcess: [
-	                	$class: 'com.urbancode.jenkins.plugins.ucdeploy.ProcessHelper$CreateProcessBlock',
-	                        processComponent: 'Deploy'
-	            	    ],
-	           	    deployVersions: '${BUILD_NUMBER}',
+	           	    	deployVersions: '${BUILD_NUMBER}',
 	                    deployOnlyChanged: false
         		]
 			    
