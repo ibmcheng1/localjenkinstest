@@ -39,23 +39,19 @@
 	                ]			    
 	            ]
              ])
-	
-	     step([$class: 'UCDeployPublisher',
-	            siteName: 'UCD-Server',
-	            component: [
-	                $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-	                componentName: 'LocalJenkinsTest',
-			deploy: [
-	            	    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeployHelper$DeployBlock',
-	            	    deployApp: 'LocalJenkinsTest',
-	                    deployEnv: 'Dev',
-	            	    deployProc: 'Deploy',
-	           	    	deployVersions: '${BUILD_NUMBER}',
-	                    deployOnlyChanged: false
-        		]
-			    
-	            ]
-             ])	
+	             
+			     step([$class: 'UCDeployPublisher',
+            		siteName: 'UCD-Server',
+            		deploy: [
+                		$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeployHelper$DeployBlock',
+                		deployApp: 'LocalJenkinsTest',
+                		deployEnv: 'Dev',
+                		deployProc: 'Deploy',
+                		deployVersions: '${BUILD_NUMBER}',
+                		deployOnlyChanged: false
+            		]
+        		])
+
 				
 	}     	    
 
