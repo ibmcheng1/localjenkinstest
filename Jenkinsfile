@@ -13,10 +13,11 @@
             #!/bin/bash
 	    pwd
 	    ls -l
-            echo "imageTag: ${imageTag}"
-            echo "BUILD_NUMBER: ${BUILD_NUMBER}"
+        echo "imageTag: ${imageTag}"
+        echo "BUILD_NUMBER: ${BUILD_NUMBER}"
 	    echo "WORKSPACE: ${WORKSPACE}"
-            """
+        """
+            
 	    step([$class: 'UCDeployPublisher',
 	            siteName: 'UCD-Server',
 	            component: [
