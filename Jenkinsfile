@@ -48,7 +48,7 @@
                 		deployApp: 'LocalJenkinsTest',
                 		deployEnv: 'Dev',
                 		deployProc: 'Deploy',
-                		deployVersions: '${BUILD_NUMBER}',
+                		deployVersions: "LocalJenkinsTest:${BUILD_NUMBER}",
                 		deployOnlyChanged: false
             		]
         		])
