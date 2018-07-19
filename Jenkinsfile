@@ -52,6 +52,18 @@
                 		deployOnlyChanged: false
             		]
         		])
+        		
+        		step([$class: 'UCDeployPublisher',
+            		siteName: 'UCD-Server',
+            		deploy: [
+                		$class: 'com.urbancode.jenkins.plugins.ucdeploy.DeployHelper$DeployBlock',
+                		deployApp: 'LocalJenkinsTest',
+                		deployEnv: 'Dev',
+                		deployProc: 'Add Status to Version - SYSTEM_TEST_PASSED',
+                		deployVersions: "LocalJenkinsTest:${BUILD_NUMBER}",
+                		deployOnlyChanged: false
+            		]
+        		])
 
 				
 	}     	    
