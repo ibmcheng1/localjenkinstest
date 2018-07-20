@@ -30,8 +30,13 @@
 	            	],
 	            	delivery: [
 	                    $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
-	                    pushVersion: '${BUILD_NUMBER}',
-			    		baseDir: 'workspace/LocalJenkinsTest_master-VKVNYMIITIN4CETXSG7S7NRTCOTWOWAUEQBM6UNPPTQHLS6TM7TA/chart/jenkinstest',
+	                    pushVersion: '${BRANCH_NAME}.${BUILD_NUMBER}',
+	                    //172.21.20.2
+			    		//baseDir: 'workspace/LocalJenkinsTest_master-VKVNYMIITIN4CETXSG7S7NRTCOTWOWAUEQBM6UNPPTQHLS6TM7TA/chart/jenkinstest',
+	                    
+	                    // local linux
+	                    baseDir: '/var/lib/jenkins/workspace/localjenkinstest_master-JYUH5UO2KHGJWNXDCV3GCFOBVM7BVUEQBWILN75V5WFRKN4M67FQ/chart/jenkinstest',
+	                    
 	                    fileIncludePatterns: '/**',
 	                    fileExcludePatterns: '',
 	                  
