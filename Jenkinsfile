@@ -1,3 +1,7 @@
+def gitCommit
+def volumes = [ hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock') ]
+volumes += secretVolume(secretName: 'jenkins-docker-sec', mountPath: '/docker_reg_sec')
+{
     node {
         def gitCommit
         stage ('Extract') {
@@ -65,7 +69,7 @@
                 		deployApp: 'LocalJenkinsTest',
                 		deployEnv: 'Dev',
                 		deployProc: 'Add Status to Version - SYSTEM_TEST_PASSED',
-                		deployVersions: "LocalJenkinsTest:${BUILD_NUMBER}",
+                		deployVersions: "LocalJenkinsTest:${BRANCH_NAME}.${BUILD_NUMBER}",
                 		deployOnlyChanged: false
             		]
         		])
@@ -74,4 +78,4 @@
 	}     	    
 
     }
-	
+}	
